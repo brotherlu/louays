@@ -1,0 +1,28 @@
+{
+  "name": "source",
+  "version": "0.0.0",
+  "homepage": "https://github.com/brotherlu/louays",
+  "authors": [
+    "Louay Cheikh <brotherlu@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "font-awesome": "fontawesome#~4.4.0",
+    "jquery": "~2.1.4",
+    "modernizr-min": "~2.8.3",
+    "fastclick": "~1.0.6",
+    "angular": "~1.4.7",
+    "angular-route": "~1.4.7",
+    "angular-animate": "~1.4.7"
+  }
+}

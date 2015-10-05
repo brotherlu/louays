@@ -4,8 +4,8 @@
 
 # Site
 title: louays.com
-subtitle: Developer, Engineer and Wizard
-description:
+subtitle: Get to know me
+description: Developer, Designer, Engineer and all round Wizard!
 author: Louay Cheikh
 language: en
 timezone: America/Montreal
@@ -63,7 +63,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: http://hexo.io/plugins/
 ## Themes: http://hexo.io/themes/
-theme: landscape
+theme: louays
 
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html

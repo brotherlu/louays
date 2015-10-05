@@ -1,0 +1,70 @@
+.nav-wrapper {
+  @include transition(all .3s ease);
+  bottom: 0;
+  height: 0;
+  right: 0;
+  margin: auto;
+  padding-right: 3em;
+  position: absolute;
+  top: 0;
+}
+
+.navigation {
+  @include transform(translate(-50%,-50%));
+  @include transition(all .3s ease);
+  border: 4px solid $black;
+  border-radius: 50%;
+  cursor: pointer;
+  display: block;
+  float: right;
+  left: 50%;
+  position: absolute;
+  width: 4em;
+  top: 50%;
+  
+  &:after {
+    content: '';
+    display: block;
+    padding-bottom: 100%;
+  }
+  
+  &:hover {
+    @extend %arrow;
+  }
+}
+
+.navigation-button {
+  @include transition(all .3s ease);
+  @include transform(translateY(-50%));
+  @include user-select(none);
+  background: $black;
+  border-radius: 2px;
+  display: inline-block;
+  height: 4px;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 2em;
+  
+  &:before,
+  &:after {
+    @include transition(all .3s ease);
+    @include transform-origin(left center);
+    background-color: $black;
+    border-radius: 2px;
+    content: ' ';
+    height: 4px;
+    position: absolute;
+    width: 2em;
+  }
+  
+  &:before {
+    top: -6px;
+  }
+  
+  &:after {
+    bottom: -6px;
+  }
+}

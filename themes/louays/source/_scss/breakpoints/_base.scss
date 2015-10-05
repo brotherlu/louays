@@ -1,0 +1,72 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-color: $light-grey;
+  font-family: $fonts;
+  font-size: 10px;
+}
+
+header {
+  @include user-select(none);
+  left: 0;
+  margin-top: 40px;
+  padding: 0 20px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+}
+
+.logo img{
+  height: 32px;
+}
+
+.core-view {
+  left: 0;
+  min-height: 100%;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.container {
+  @include outer-container;
+  position: relative;
+}
+
+.page {
+  min-height: 100%;
+  position: absolute;
+  width: 100%;
+  
+  h1 {
+    font-size: 3em;
+    height: 0;
+    margin: 0;
+    padding-bottom: .9em;
+    padding-top: 3em;
+    text-align: center;
+    text-transform: uppercase;
+  }
+}
+
+.content {
+  min-height: 100%;
+  position: absolute;
+  width: 100%;
+  
+  &.home {
+    background: url('/img/21038115342_785ec537eb_o.jpg') transparent center right no-repeat;
+    background-size: cover;
+    color: $white;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, .2);
+    
+    h1 {
+      margin-left: 20px;
+      text-align: left;
+    }
+  }
+}

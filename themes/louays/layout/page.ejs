@@ -1,0 +1,6 @@
+<div class="page" style="background: <%= page.background %>; color: <%= page.color %>">
+  <% if(page.title !== 'home') { %>
+    <h1 style="background: <%= page.color %>; color: <%= page.background %>"><%= page.title %></h1>
+  <% } %>
+  <%- page.content %>
+</div>

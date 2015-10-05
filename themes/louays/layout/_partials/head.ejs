@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang='<%= config.language %>' class="no-js" ng-app='louays'>
+<head>
+  <meta charset="utf-8">
+  <title ng-bind='meta_title'><%= config.title %></title>
+  
+  <meta name="description" content="<%= config.description %>" ng-bind='meta_description'>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!--  OpenGraph-->
+  <meta name="og:title" content="<%= config.title %>" ng-bind='meta_title'>
+  <meta name="og:description" content="<%= config.description %>" ng-bind='meta_description'>
+  <meta name="og:type" content='website'>
+  <meta name="og:image" content="<%= config.image %>" ng-bind="meta_image">
+  <!--  End OpenGraph-->
+  
+  <!--  Twitter Card-->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@brotherlu">
+  <meta name="twitter:title" content="<%= config.title %>" ng-bind='meta_title'>
+  <meta name="twitter:image" content="<%= config.image %>" ng-bind='meta_image'>
+  <meta name="twitter:description" content="<%= config.description %>" ng-bind='meta_description'>
+  <!--  End Twitter Card-->
+  
+  <%- css('bower_components/font-awesome/css/font-awesome.min.css') %>
+  <%- css('bower_components/animate.css/animate.min.css') %>
+  <%- css('https://fonts.googleapis.com/css?family=Roboto:400,700,400italic,300,900') %>
+  <%- css('css/style.css') %>
+  <%- js('bower_components/modernizr-min/modernizr.min.js') %>
+  <%- js('bower_components/jquery/dist/jquery.min.js') %>
+  <%- js('bower_components/angular/angular.min.js') %>
+  <%- js('bower_components/angular-route/angular-route.min.js') %>
+  <%- js('bower_components/angular-animate/angular-animate.min.js') %>
+  <%- js('bower_components/fastclick/lib/fastclick.js') %>
+  <%- js('app/app.js') %>
+</head>

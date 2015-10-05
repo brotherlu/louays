@@ -1,0 +1,24 @@
+%arrow {
+  background-color: $black;
+  width: 5em;
+
+  .navigation-button {
+    background-color: $white;
+
+    &:after,
+    &:before {
+      background-color: $white;
+      width: 18px;
+    }
+
+    &:after {
+      @include transform(rotateZ(45deg));
+      bottom: 1px;
+    }
+
+    &:before {
+      @include transform(rotateZ(-45deg));
+      top: 1px;
+    }
+  }
+}
