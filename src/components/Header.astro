@@ -1,0 +1,23 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/logo.png';
+---
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="site-logo" href="/" aria-label="Louay Cheikh — Home">
+      <Image src={logo} alt="Louay Cheikh" width={96} height={116} loading="eager" />
+    </a>
+
+    <button
+      id="drawer-open"
+      class="menu-trigger"
+      type="button"
+      aria-label="Open navigation menu"
+      aria-expanded="false"
+      aria-controls="drawer"
+    >
+      <span class="menu-trigger__bars" aria-hidden="true"></span>
+    </button>
+  </div>
+</header>

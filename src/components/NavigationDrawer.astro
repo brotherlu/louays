@@ -1,0 +1,138 @@
+---
+const pathname = Astro.url.pathname.replace(/\/+$/, '') || '/';
+
+const navItems = [
+  { href: '/', label: 'Home' },
+  { href: '/work/', label: 'Work' },
+  { href: '/services/', label: 'Services' },
+  { href: '/about/', label: 'About' },
+  { href: '/contact/', label: 'Contact' },
+];
+
+function isCurrent(href: string) {
+  const normalized = href.replace(/\/+$/, '') || '/';
+  return normalized === pathname;
+}
+---
+
+<dialog class="Drawer" id="drawer" aria-label="Site navigation">
+  <div class="Drawer-scroller">
+    <nav class="Drawer-sheet" aria-label="Primary">
+      <button
+        id="drawer-close"
+        class="Drawer-close"
+        type="button"
+        aria-label="Close navigation menu"
+        autofocus
+      >
+        <svg
+          width="32"
+          height="32"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="15" y1="9" x2="9" y2="15"></line>
+          <line x1="9" y1="9" x2="15" y2="15"></line>
+        </svg>
+      </button>
+
+      <ul class="Drawer-list">
+        {navItems.map((item) => (
+          <li>
+            <a
+              class="Drawer-link"
+              href={item.href}
+              aria-current={isCurrent(item.href) ? 'page' : undefined}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <div class="Drawer-footer">
+        louays.com &middot; Montreal
+      </div>
+    </nav>
+  </div>
+</dialog>
+
+<script>
+  const drawer = document.getElementById('drawer') as HTMLDialogElement | null;
+  const openBtn = document.getElementById('drawer-open');
+  const closeBtn = document.getElementById('drawer-close');
+  const scroller = drawer?.querySelector('.Drawer-scroller') as HTMLElement | null;
+  const sheet = drawer?.querySelector('.Drawer-sheet') as HTMLElement | null;
+
+  if (drawer && openBtn && closeBtn && scroller && sheet) {
+    let isOpening = false;
+
+    async function openDrawer() {
+      if (drawer!.open) return;
+      isOpening = true;
+      drawer!.showModal();
+      scroller!.scrollTo({ left: 0, behavior: 'instant' });
+      await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+      scroller!.scrollTo({ left: sheet!.offsetWidth, behavior: 'auto' });
+      isOpening = false;
+    }
+
+    function closeDrawer() {
+      if (!drawer!.open) return;
+      scroller!.scrollTo({ left: 0, behavior: 'auto' });
+    }
+
+    function onDrawerOpened() {
+      openBtn!.setAttribute('aria-expanded', 'true');
+    }
+
+    function onDrawerClosed() {
+      if (!drawer!.open || isOpening) return;
+      drawer!.close();
+      openBtn!.setAttribute('aria-expanded', 'false');
+    }
+
+    const visibleThreshold = 1 / Math.max(window.innerWidth, 1);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries.at(-1);
+        if (!entry) return;
+        if (entry.intersectionRatio < visibleThreshold) onDrawerClosed();
+        if (entry.intersectionRatio >= 0.99) onDrawerOpened();
+      },
+      { root: drawer, threshold: [visibleThreshold, 1] },
+    );
+    observer.observe(sheet);
+
+    // Fallback backdrop fade for browsers without scroll-driven animations
+    if (!CSS.supports('animation-timeline: scroll()')) {
+      scroller.addEventListener('scroll', () => {
+        const ratio = Math.min(1, Math.max(0, scroller.scrollLeft / Math.max(sheet.offsetWidth, 1)));
+        drawer.style.setProperty('--drawer-backdrop', String(ratio));
+      });
+    }
+
+    openBtn.addEventListener('click', openDrawer);
+    closeBtn.addEventListener('click', closeDrawer);
+
+    // Light-dismiss on dimmed area outside sheet
+    drawer.addEventListener('click', (event) => {
+      if (!sheet.contains(event.target as Node)) closeDrawer();
+    });
+
+    // Animate slide-out on Escape
+    drawer.addEventListener('cancel', (event) => {
+      if (event.cancelable) {
+        event.preventDefault();
+        closeDrawer();
+      }
+    });
+  }
+</script>

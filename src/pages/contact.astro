@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Contact"
+  description="Get in touch with Louay Cheikh."
+  theme="contact"
+>
+  <section class="page-banner">
+    <div class="container">
+      <h1>Contact</h1>
+      <p class="page-banner__subtitle">
+        Got a project in mind? Let's discuss it.
+      </p>
+    </div>
+  </section>
+
+  <section class="page-body">
+    <div class="container contact-wrap">
+      <div class="card contact-card">
+        <span class="card__tag">Say Hello</span>
+        <h2>What's Next? Let's Decide Together</h2>
+        <p>
+          Reach out directly by email or connect on GitHub and X.
+        </p>
+
+        <div class="contact-actions">
+          <a class="btn btn--light" href="mailto:louay.cheikh@gmail.com">
+            louay.cheikh@gmail.com
+          </a>
+          <a
+            class="btn btn--ghost"
+            href="https://github.com/brotherlu"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub
+          </a>
+          <a
+            class="btn btn--ghost"
+            href="https://x.com/brotherlu"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            @brotherlu
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact-wrap {
+    max-width: 44rem;
+  }
+
+  .contact-card {
+    text-align: center;
+    padding: clamp(2rem, 5vw, 3rem);
+  }
+
+  .contact-actions {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+</style>

@@ -1,0 +1,82 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const skills = [
+  'HTML5 & CSS3',
+  'Sass / SCSS',
+  'JavaScript',
+  'Python',
+  'C++',
+  'PHP & Laravel',
+  'RESTful API Development',
+  'WordPress',
+  'CATIA',
+  'SolidWorks',
+  'Blender',
+  'Git & Modern Web Tooling',
+];
+---
+
+<BaseLayout
+  title="About"
+  description="About Louay Cheikh — Developer, Designer, Engineer based in Montreal."
+  theme="about"
+>
+  <section class="page-banner">
+    <div class="container">
+      <h1>About</h1>
+      <p class="page-banner__subtitle">
+        I enjoy the process of exploration that goes into every project.
+      </p>
+    </div>
+  </section>
+
+  <section class="page-body">
+    <div class="container about-layout">
+      <div class="card">
+        <span class="card__tag">Background</span>
+        <h2>Software &amp; Physibles</h2>
+        <p>
+          I'm Louay Cheikh—an engineer, developer, and designer based in Montreal. I enjoy
+          having my hand in many diverse projects, from web applications and open-source
+          modeling tools to autonomous aircraft.
+        </p>
+      </div>
+
+      <div class="card">
+        <span class="card__tag">Toolkit</span>
+        <h2>What I Bring to the Team</h2>
+        <ul class="skills-list">
+          {skills.map((skill) => (
+            <li>{skill}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .about-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    gap: 1.5rem;
+  }
+
+  .skills-list {
+    list-style: none;
+    margin: 0.75rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+  }
+
+  .skills-list li {
+    padding: 0.35rem 0.8rem;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.2);
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+</style>

@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const services = [
+  {
+    tag: '01',
+    title: 'Web & App Engineering',
+    summary:
+      'End-to-end development of fast, reliable, maintainable web applications and APIs tailored to your product goals.',
+  },
+  {
+    tag: '02',
+    title: 'UI / UX & Frontend Craft',
+    summary:
+      'Responsive, accessible interfaces built with modern CSS, crisp typography, and smooth interactions that work everywhere.',
+  },
+  {
+    tag: '03',
+    title: 'Technical Architecture & Consulting',
+    summary:
+      'Codebase modernization, performance audits, system design, and pragmatic engineering guidance for growing teams.',
+  },
+];
+---
+
+<BaseLayout
+  title="Services"
+  description="Software engineering, frontend design, and technical consulting services."
+  theme="services"
+>
+  <section class="page-banner">
+    <div class="container">
+      <h1>Services</h1>
+      <p class="page-banner__subtitle">
+        From initial architecture to polished production launches.
+      </p>
+    </div>
+  </section>
+
+  <section class="page-body">
+    <div class="container">
+      <div class="card-grid">
+        {services.map((service) => (
+          <article class="card">
+            <span class="card__tag">{service.tag}</span>
+            <h2>{service.title}</h2>
+            <p>{service.summary}</p>
+          </article>
+        ))}
+      </div>
+
+      <div class="cta-row">
+        <a class="btn btn--light" href="/contact/">Start a Conversation</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .cta-row {
+    margin-top: 2.5rem;
+    text-align: center;
+  }
+</style>

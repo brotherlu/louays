@@ -1,0 +1,115 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import heroImg from '../assets/hero.jpg';
+---
+
+<BaseLayout title="Home" theme="home" showFooter={false}>
+  <section class="hero">
+    <Image
+      src={heroImg}
+      alt=""
+      class="hero__bg"
+      widths={[800, 1280, 1920]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+      aria-hidden="true"
+    />
+    <div class="hero__scrim" aria-hidden="true"></div>
+
+    <div class="container hero__content">
+      <h1 class="hero__title">
+        Louay,<br />
+        Engineer,<br />
+        Developer,<br />
+        <em>Wizard!</em>
+      </h1>
+      <p class="hero__lead">
+        Building fast, thoughtful software and web experiences from Montreal.
+      </p>
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="/work/">View Work</a>
+        <a class="btn btn--ghost" href="/contact/">Get in Touch</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding-block: calc(var(--header-height) + 2rem) 3rem;
+  }
+
+  .hero__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: right center;
+    z-index: 0;
+  }
+
+  /* Subtle light scrim on the left so dark text stays WCAG AAA legible on all screens */
+  .hero__scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+      90deg,
+      rgba(247, 247, 247, 0.92) 0%,
+      rgba(247, 247, 247, 0.72) 45%,
+      rgba(247, 247, 247, 0.12) 100%
+    );
+  }
+
+  .hero__content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero__title {
+    margin: 0;
+    font-size: clamp(3rem, 9vw, 6rem);
+    font-weight: 900;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    color: var(--black);
+  }
+
+  .hero__title em {
+    font-style: italic;
+    color: var(--red);
+  }
+
+  .hero__lead {
+    margin: 1.5rem 0 0;
+    max-width: 30rem;
+    font-size: clamp(1.05rem, 2vw, 1.3rem);
+    color: var(--page-muted);
+  }
+
+  .hero__actions {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  @media (max-width: 767px) {
+    .hero__scrim {
+      background: linear-gradient(
+        180deg,
+        rgba(247, 247, 247, 0.88) 0%,
+        rgba(247, 247, 247, 0.78) 65%,
+        rgba(247, 247, 247, 0.45) 100%
+      );
+    }
+  }
+</style>
