@@ -1,8 +1,9 @@
 ---
 import { Image } from 'astro:assets';
-import type { Project } from '../data/projects';
-interface Props { project: Project; index: number }
-const { project, index } = Astro.props;
+import type { CollectionEntry } from 'astro:content';
+interface Props { project: CollectionEntry<'projects'>; index: number }
+const { project: entry, index } = Astro.props;
+const project = { ...entry.data, slug: entry.id };
 const no = String(index + 1).padStart(2, '0');
 ---
 

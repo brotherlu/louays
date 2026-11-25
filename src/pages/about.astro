@@ -1,9 +1,13 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { site, bio, skillGroups } from '../data/site';
+import { getEntry, render } from 'astro:content';
+import { site, skillGroups } from '../data/site';
+
+const page = (await getEntry('pages', 'about'))!;
+const { Content } = await render(page);
 ---
 
-<BaseLayout title="About" description="About Louay Cheikh: developer, designer and engineer based in Montréal.">
+<BaseLayout title={page.data.title} description={page.data.description}>
   <div class="page-title">
     <span class="label">{site.location}</span>
     <h1>About</h1>
@@ -11,7 +15,7 @@ import { site, bio, skillGroups } from '../data/site';
 
   <section class="section about">
     <div class="about__bio">
-      {bio.map((p) => <p>{p}</p>)}
+      <Content />
       {site.cv && <div class="btns"><a class="btn" href={site.cv.url}>{site.cv.label}</a></div>}
     </div>
 
@@ -29,7 +33,7 @@ import { site, bio, skillGroups } from '../data/site';
 
 <style>
   .about { grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 2.5rem; align-items: start; }
-  .about__bio { display: grid; gap: 1rem; max-width: 62ch; font-size: 1.1rem; }
+  .about__bio { display: grid; gap: 1rem; align-content: start; max-width: 62ch; font-size: 1.1rem; }
   .about__skills { display: grid; gap: 1.1rem; }
   .skill-group { display: grid; gap: 0.5rem; }
 </style>

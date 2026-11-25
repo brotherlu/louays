@@ -1,8 +1,15 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
-import { projects } from '../data/projects';
-import { site, services, titleBlock } from '../data/site';
+import { getCollection, render } from 'astro:content';
+import { site, titleBlock } from '../data/site';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const services = await Promise.all(
+  (await getCollection('services'))
+    .sort((a, b) => a.data.order - b.data.order)
+    .map(async (s) => ({ title: s.data.title, Content: (await render(s)).Content })),
+);
 ---
 
 <BaseLayout title="Home">
@@ -58,7 +65,7 @@ import { site, services, titleBlock } from '../data/site';
       <h2>How I can help</h2>
     </div>
     <div class="strip">
-      {services.map((s) => <div><h3>{s.title}</h3><p>{s.summary}</p></div>)}
+      {services.map((s) => <div><h3>{s.title}</h3><s.Content /></div>)}
     </div>
     <div class="btns"><a class="btn btn--primary" href="/contact/">Start a conversation</a></div>
   </section>
