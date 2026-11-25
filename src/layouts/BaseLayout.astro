@@ -1,35 +1,15 @@
 ---
 import Header from '../components/Header.astro';
-import NavigationDrawer from '../components/NavigationDrawer.astro';
+import { site } from '../data/site';
 import '../styles/global.css';
 
-interface Props {
-  title: string;
-  description?: string;
-  theme?: 'home' | 'work' | 'services' | 'about' | 'contact' | 'not-found';
-  showFooter?: boolean;
-}
+interface Props { title: string; description?: string }
+const { title, description = site.tagline } = Astro.props;
 
-const {
-  title,
-  description = 'Developer, Designer, Engineer and all-round Wizard!',
-  theme = 'home',
-  showFooter = true,
-} = Astro.props;
-
-const fullTitle = title === 'Home' ? 'Louay Cheikh — louays.com' : `${title} | louays.com`;
+const fullTitle = title === 'Home' ? `${site.name} — louays.com` : `${title} | louays.com`;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL('/og-image.jpg', Astro.site);
 const year = new Date().getFullYear();
-
-const themeStyles: Record<NonNullable<Props['theme']>, string> = {
-  home: '--page-bg: #f7f7f7; --page-fg: #18181b; --nav-color: #18181b; --nav-hover-bg: #18181b; --nav-hover-fg: #ffffff;',
-  work: '--page-bg: #c2410c; --page-fg: #ffffff; --nav-color: #c2410c; --nav-hover-bg: #c2410c; --nav-hover-fg: #ffffff;',
-  services: '--page-bg: #157347; --page-fg: #ffffff; --nav-color: #157347; --nav-hover-bg: #157347; --nav-hover-fg: #ffffff;',
-  about: '--page-bg: #0369a1; --page-fg: #ffffff; --nav-color: #0369a1; --nav-hover-bg: #0369a1; --nav-hover-fg: #ffffff;',
-  contact: '--page-bg: #b91c1c; --page-fg: #ffffff; --nav-color: #b91c1c; --nav-hover-bg: #b91c1c; --nav-hover-fg: #ffffff;',
-  'not-found': '--page-bg: #1e1e24; --page-fg: #ffffff; --nav-color: #ffffff; --nav-hover-bg: #ffffff; --nav-hover-fg: #1e1e24;',
-};
 ---
 
 <!doctype html>
@@ -39,54 +19,38 @@ const themeStyles: Record<NonNullable<Props['theme']>, string> = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    <meta name="color-scheme" content="light dark" />
     <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" type="image/png" href="/favicon.png" />
 
-    <!-- OpenGraph -->
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={ogImage} />
 
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@brotherlu" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
 
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,700;0,900;1,400;1,900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
   </head>
-  <body style={themeStyles[theme]}>
+  <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
-
-    <Header />
-
-    <main id="main-content">
-      <slot />
-    </main>
-
-    {showFooter && (
-      <footer class="site-footer">
-        <div class="container site-footer__inner">
-          <span>&copy; {year} Louay Cheikh</span>
-          <ul class="site-footer__links">
-            <li><a href="/work/">Work</a></li>
-            <li><a href="/services/">Services</a></li>
-            <li><a href="/about/">About</a></li>
-            <li><a href="/contact/">Contact</a></li>
-          </ul>
-        </div>
-      </footer>
-    )}
-
-    <NavigationDrawer />
+    <div class="frame">
+      <Header />
+      <main id="main-content"><slot /></main>
+    </div>
+    <footer class="site-footer">
+      <span>&copy; {year} {site.name}</span>
+      <span>louays.com &middot; {site.location}</span>
+    </footer>
   </body>
 </html>

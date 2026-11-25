@@ -1,0 +1,21 @@
+---
+import { Image } from 'astro:assets';
+import type { Project } from '../data/projects';
+interface Props { project: Project; index: number }
+const { project, index } = Astro.props;
+const no = String(index + 1).padStart(2, '0');
+---
+
+<a class="proj" href={`/work/${project.slug}/`}>
+  <div class="proj__img">
+    <Image src={project.image} alt={project.imageAlt} widths={[480, 800]} sizes="(max-width: 767px) 100vw, 360px" />
+  </div>
+  <div class="proj__body">
+    <div class="proj__row"><span class="proj__no">Sheet {no}</span><span>{project.category}</span></div>
+    <h3>{project.title}</h3>
+    <p>{project.summary}</p>
+    <ul class="spec" aria-label="Technologies and highlights">
+      {project.features.slice(0, 3).map((f) => <li>{f}</li>)}
+    </ul>
+  </div>
+</a>

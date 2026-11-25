@@ -1,23 +1,17 @@
 ---
-import { Image } from 'astro:assets';
-import logo from '../assets/logo.png';
+import { nav } from '../data/site';
+const pathname = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const isCurrent = (href: string) =>
+  !href.includes('#') && (pathname === href.replace(/\/+$/, '') || pathname.startsWith(href.replace(/\/+$/, '') + '/'));
 ---
 
 <header class="site-header">
-  <div class="container site-header__inner">
-    <a class="site-logo" href="/" aria-label="Louay Cheikh — Home">
-      <Image src={logo} alt="Louay Cheikh" width={96} height={116} loading="eager" />
-    </a>
-
-    <button
-      id="drawer-open"
-      class="menu-trigger"
-      type="button"
-      aria-label="Open navigation menu"
-      aria-expanded="false"
-      aria-controls="drawer"
-    >
-      <span class="menu-trigger__bars" aria-hidden="true"></span>
-    </button>
-  </div>
+  <a class="mark" href="/" aria-label="Louay Cheikh, home">louay<b>.</b>s</a>
+  <nav class="site-nav" aria-label="Primary">
+    <ul>
+      {nav.map((item) => (
+        <li><a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a></li>
+      ))}
+    </ul>
+  </nav>
 </header>
